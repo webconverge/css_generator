@@ -13,7 +13,7 @@ if(pathname != "index.html"){
             fetch("/"+pathname+"/form_data.json").then(res => res.json()).then(list => {
 
                 // render html
-                document.body.innerHTML = ui.editor(list, template.initial_css, template.html(template.initial_css))
+                document.body.innerHTML = ui.editor(list, template.initial_css, template.html(template.initial_css), template.title)
 
                 // add js script
                 const script = document.createElement("script")

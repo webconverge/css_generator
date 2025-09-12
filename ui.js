@@ -38,7 +38,7 @@ const input = {
     select:function(data){
         return `
             <label for="${data.id}">${data.label}</label>
-            <select name="${data.name}" id="${data.id}">
+            <select type="select" class="input" name="${data.name}" id="${data.id}">
                 ${
                     data.values.map(value => `
                         <option>${value}</option>
@@ -56,12 +56,12 @@ const input = {
                     ${
                         index == 0 ? 
                         `
-                            <input id="${item.id}" type="${data.type}" name="${data.name}" value="${item.value}" checked>
+                            <input class="input" id="${item.id}" type="radio" name="${data.name}" value="${item.value}" checked>
                             <label for="${item.id}">${item.label}</label>
                         `
                         :
                         `
-                            <input id="${item.id}" type="${data.type}" name="${data.name}" value="${item.value}">
+                            <input class="input" id="${item.id}" type="radio" name="${data.name}" value="${item.value}">
                             <label for="${item.id}">${item.label}</label>
                         `
                     }
@@ -74,7 +74,7 @@ const input = {
     range:function(data){
         return `
             <label for="${data.id}">${data.label}</label>
-            <input type="${data.type}" name="${data.name}" min="${data.min}" max="${data.min}" value="${data.initial_value}" id="${data.id}">
+            <input class="input" type="range" name="${data.name}" min="${data.min}" max="${data.min}" value="${data.initial_value}" id="${data.id}">
         `
     },
     
@@ -82,7 +82,7 @@ const input = {
     number:function(data){
         return `
             <label for="${data.id}">${data.label}</label>
-            <input type="${data.type}" min="${data.min}" max="${data.max}" id="${data.id}" value="${data.initial_value}" name="${data.name}"> 
+            <input class="input" type="number" min="${data.min}" max="${data.max}" id="${data.id}" value="${data.initial_value}" name="${data.name}"> 
         `
     },
     
@@ -90,7 +90,14 @@ const input = {
     color:function(data){
         return `
            <label for="${data.id}">${data.label}</label>
-           <input id="${data.id}" type="${data.type}" value="${data.initial_value}" name="${data.name}">
+           <input class="input" id="${data.id}" type="color" value="${data.initial_value}" name="${data.name}">
+        `
+    },
+
+    // input file
+    file:function(data){
+        return `
+        
         `
     }
 
@@ -121,8 +128,15 @@ function css_code(css){
     return `
         <div class="css-code-wrapper">
             <pre class="css-code">${css}</pre>
-            <button>Copy</button>
+            <button class="copy-code">Copy</button>
         </div>
+    `
+}
+
+// page title
+function page_title(title){
+    return `
+        <div class="page-title">${title}</div>
     `
 }
 
@@ -140,10 +154,11 @@ function home(list){
 
 
 // editor page
-function editor(list, css, html){
+function editor(list, css, html, title){
     return `
         ${header()}
         <div class="main">
+            ${page_title(title)}
             ${user_input(list)}
             ${preview(html)}
             ${css_code(css)}

@@ -3,11 +3,11 @@
 
 const initial_css = "border:1px solid #0000FF ;"
 
+const title = "Border"
+
 
 function css(form_data){
-    return `
-        ${form_data.get("border_side")}:${form_data.get("border_width")}px ${form_data.get("border_style")} ${form_data.get("border_color")};
-    `
+    return `${form_data.get("border_side")}:${form_data.get("border_width")}px ${form_data.get("border_style")} ${form_data.get("border_color")};`
 }
 
 
@@ -24,6 +24,6 @@ function html(css_code){
     `
 }
 
-export { initial_css, css, html }
+export { initial_css, css, html, title }
 
 
