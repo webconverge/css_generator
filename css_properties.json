@@ -1,0 +1,24 @@
+
+
+[
+    {
+        "name":"Border",
+        "path":"/editor/border",
+        "config":"/css_properties/border.js"
+    },
+
+    {
+        "name":"Border Radius",
+        "path":"/editor/border-radius",
+        "config":"/css_properties/border_radius.js"
+    },
+
+    {
+        "name":"Flex Box",
+        "path":"/editor/flex-box",
+        "config":"/css_properties/flex_box.js"
+    }
+
+
+]
+

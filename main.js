@@ -1,58 +1,67 @@
 
+import { page } from "/ui/main.js"
 
 
-const pathname = window.location.pathname.split("/")[1] || "index.html"
+let current_path = "/"
 
 
-if(pathname != "index.html"){
+function render(path){
 
-    import("/ui.js").then(ui => {
+    const root_path = path.split("/")[1] || "home"
 
-        import("/"+pathname+"/template.js").then(template => {
+    fetch("/css_properties.json").then(res => res.json()).then(properties => {
 
-            fetch("/"+pathname+"/form_data.json").then(res => res.json()).then(list => {
+        if(root_path == "root"){
 
-                // render html
-                document.body.innerHTML = ui.editor(list, template.initial_css, template.html(template.initial_css), template.title)
+            document.body.innerHTML = page.home(properties)
+        }
+        else{
 
-                // add js script
-                const script = document.createElement("script")
-                script.src = "/static/js/editor.js"
-                script.type = "module"
-                document.body.append(script)
+            document.body.innerHTML = page.editor(properties, properties.find(property => property.path == path).name)
+
+            document.body.dispatchEvent(new CustomEvent("page-ready"), {
                 
-                // add css style
-                const link = document.createElement("link")
-                link.rel = "stylesheet"
-                link.href = "/static/css/editor.css"
-                document.head.append(link)
+                detail:{
+
+                    data: properties.find(property => property.path == path)
+                },
+
+                bubbles:true
             })
-        })
-    })
-
-}
-else{
-    import("./ui.js").then(ui => {
-
-        fetch("./generator_list.json").then(res => res.json()).then(list => {
-            
-            // render html
-            document.body.innerHTML = ui.home(list)
-            
-            // add js script
-            const script = document.createElement("script")
-            script.src = "./static/js/home.js"
-            script.type = "module"
-            document.body.append(script)
-            
-            // add css style
-            const link = document.createElement("link")
-            link.rel = "stylesheet"
-            link.href = "./static/css/home.css"
-            document.head.append(link)
-        })
+        }
     })
 }
+
+
+history.replaceState({path:current_path}, "", current_path)
+
+document.body.addEventListener("click", e => {
+
+    if(e.target.tagName == "A" && e.target.hostname == window.location.hostname){
+
+        e.preventDefault()
+
+        if(current_path != e.target.pathname){
+
+            current_path = e.target.pathname
+
+            history.pushState({path:current_path}, "", current_path)
+
+            render(e.target.pathname)
+
+        }
+
+    }
+
+})
+
+
+window.addEventListener("popstate", e => {
+
+    current_path = e.state.path
+
+    render(current_path)
+})
 
 
 
