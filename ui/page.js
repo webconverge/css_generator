@@ -3,8 +3,10 @@
 function header(){
     return `
         <div class="header">
-            <a href="/">Css Generator</a>
-            <button></button>
+            <div>
+                <a href="/">Css Generator</a>
+                <button><i class="fa-solid fa-bars"></i></button>
+            </div>
         </div>
     `
 }
@@ -12,27 +14,33 @@ function header(){
 
 function footer(){
     return `
-        <div class="footer">Web Converge</div>
+        <div class="footer"><a href="/">Web Converge</a></div>
     `
 }
 
 
 function css_properties(properties){
     return `
-        <ul class="css_properties">
-            ${
-                properties.map(property => `
-                    <li><a href=${property.path}>${property.name}</a></li>
-                `).join(" ")
-            }
-        </ul>
+        <div class="css-properties">
+            <div>
+                ${
+                    properties.map(property => `
+                        <a href=${property.path}>${property.name}</a>
+                    `).join(" ")
+                }
+            </div>
+        </div>
     `
 }
 
 
 function title(name){
     return `
-        <div class="title">${name}</div>
+        <div class="title">
+            <div>
+                <span>${name}</span>
+            </div>
+        </div>
     `
 }
 
@@ -48,40 +56,48 @@ function side(properties, name){
     return `
         <div class="side">
             <div>
-                <a href="/">Css Generator</a>
-                <button></button>
+                <span>Css Properties</span>
+                <button><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <ul>
+            <div>
                 ${
                     properties.map(property => `
                         ${
-                            property.name == name ? `<li><a href=${property.path} active>${property.name}</a></li>`: `<li><a href=${property.path}>${property.name}</a></li>`
+                            property.name == name ? `<a href=${property.path} active>${property.name}</a>`: `<a href=${property.path}>${property.name}</a>`
                         }
                     `).join(" ")
                 }
-            </ul>
+            </div>
         </div>
     `
 }
 
 
-function user_form(){
+function user_form(form){
     return `
-        <form class="user-form"></form>
+        <form class="user-form">${form}</form>
     `
 }
 
-function preview(){
+function preview(prev){
     return `
-        <div class="preview"></div>
+        <div class="preview">
+            <span>Preview</span>
+            <div>${prev}</div>
+        </div>
     `
 }
 
-function css_code(){
+function css_code(css){
     return `
         <div class="css-code">
-            <pre></pre>
-            <button>Copy</button>
+            <div>
+                <span>Css Code</span>
+                <button>Copy</button>
+            </div>
+            <div>
+                <pre>${css}</pre>
+            </div>
         </div>
     `
 }
@@ -98,16 +114,18 @@ function home(properties){
 }
 
 
-function editor(properties, name){
+function editor(properties, name, form, prev, css){
     return `
         <div class="editor">
             ${side(properties, name)}
             <div class="main">
                 ${header()}
                 ${title(name)}
-                ${user_form()}
-                ${preview()}
-                ${css_code()}
+                <div class="generator">
+                    ${user_form(form)}
+                    ${preview(prev)}
+                    ${css_code(css)}
+                </div>
                 ${footer()}
             </div>
             ${overlay()}

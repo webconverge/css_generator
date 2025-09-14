@@ -1,6 +1,8 @@
 
 import { page } from "/ui/main.js"
 
+import { form } from "/ui/main.js"
+
 let current_path = "/"
 
 function render(path){
@@ -17,19 +19,25 @@ function render(path){
         }
         else{
 
-            document.title = properties.find(property => property.path == path).name
+            const data = properties.find(property => property.path == path)
 
-            document.body.innerHTML = page.editor(properties, properties.find(property => property.path == path).name)
+            import(data.config).then(mod => {
 
-            document.body.dispatchEvent(new CustomEvent("page-ready", {
-                
-                detail:{
+                document.title = data.name
 
-                    data: properties.find(property => property.path == path)
-                },
+                document.body.innerHTML = page.editor(properties, data.name, form(mod.form_data), mod.template(mod.css(null)), mod.css(null))
 
-                bubbles:true
-            }))
+                document.body.dispatchEvent(new CustomEvent("page-ready", {
+                    
+                    detail:{
+    
+                        data: data
+                    },
+    
+                    bubbles:true
+                }))
+
+            })
         }
     })
 }
