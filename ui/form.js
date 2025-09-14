@@ -5,7 +5,7 @@ const input = {
     select:function(data){
         return `
             <div class="input">
-                <label for="${data.id}">${data.label}<label>
+                <label for="${data.id}">${data.label}</label>
                 <select name="${data.name}" id=${data.id}>
                     ${
                         data.options.map(option => `
@@ -17,6 +17,7 @@ const input = {
         `
     },
 
+    
     color:function(data){
         return `
             <div class="input">
@@ -26,6 +27,7 @@ const input = {
         `
     },
 
+    
     range:function(data){
         return `
             <div class="input">
@@ -34,6 +36,7 @@ const input = {
             </div>
         `
     },
+
 
     number:function(data){
         return `
@@ -44,6 +47,7 @@ const input = {
         `
     },
 
+
     text:function(data){
         return `
             <div class="input">
@@ -53,14 +57,28 @@ const input = {
         ` 
     },
 
+    
+    list:function(data){
+        return `
+            <div class="input-list">
+                ${
+                    data.list.map(item => `
+                        ${item.type == "text" || item.type == "color" || item.type == "range" || item.type == "select" || item.type == "number" || item.type == "group" ?  `${this[item.type](item)}` : ""}
+                    `).join(" ")
+                }
+            </div>   
+        `
+    },
+
+
     group:function(data){
         return `
-            <div class="group">
-                <span>${data.name}</span>
+            <div class="input-group">
+                <span>${data.title}</span>
                 <div>
                     ${
                         data.list.map(item => `
-                            ${this[item.type](item)}                            
+                            ${item.type == "text" || item.type == "color" || item.type == "range" || item.type == "select" || item.type == "number" ?  `${this[item.type](item)}` : ""}
                         `).join(" ")
                     }
                 </div>
@@ -68,35 +86,32 @@ const input = {
         `
     },
 
-    group_list:function(){
+
+    toggle:function(data){
         return `
-        
+            <div class="toggle-input">
+                ${this.select(data.switch)}
+                ${data.option_1.type == "text" || data.option_1.type == "color" || data.option_1.type == "range" || data.option_1.type == "select" || data.option_1.type == "number" || data.option_1.type == "group" || data.option_1.type == "list" ? `${this[data.option_1.type](data.option_1)}` : ""} 
+                ${data.option_2.type == "text" || data.option_2.type == "color" || data.option_2.type == "range" || data.option_2.type == "select" || data.option_2.type == "number" || data.option_2.type == "group" || data.option_2.type == "list" ? `${this[data.option_2.type](data.option_2)}` : ""}
+            </div>
         `
     },
 
-    switch_content:function(data){
+
+    dynamic:function(data){
         return `
-            <div class="switch-content"></div>
-        `
-    },
-    
-    dynamic_content:function(data){
-        return `
-            <div class="dynamic-content"></div>
+            <div class="dynamic-input"></div>
         `
     }
 
 }
 
+
+
 function form(data){
-    return `
-        ${
-            data.list.map(item => `
-                ${input[item.type](item)}                            
-            `).join(" ")
-        }
-    `
+    return input[data.type](data)
 }
+
 
 export { form }
 

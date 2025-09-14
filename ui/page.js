@@ -55,7 +55,7 @@ function side(properties, name){
                 ${
                     properties.map(property => `
                         ${
-                            property.name == name ? `<li><a href=${property.path} active>${item.name}</a></li>`: `<li><a href=${item.path}>${item.name}</a></li>`
+                            property.name == name ? `<li><a href=${property.path} active>${property.name}</a></li>`: `<li><a href=${property.path}>${property.name}</a></li>`
                         }
                     `).join(" ")
                 }
@@ -103,6 +103,7 @@ function editor(properties, name){
         <div class="editor">
             ${side(properties, name)}
             <div class="main">
+                ${header()}
                 ${title(name)}
                 ${user_form()}
                 ${preview()}

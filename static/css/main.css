@@ -6,8 +6,17 @@
 @import url("/static/css/editor.css");
 
 :root{
-
-
-
+    --black-olive: #1f271bff;
+    --gunmetal: #1a3130ff;
+    --midnight-green: #153b44ff;
+    --indigo-dye: #0b4f6cff;
+    --lapis-lazuli: #145c9eff;
+    --ucla-blue: #4274a1ff;
+    --air-force-blue: #708ba3ff;
+    --dun: #cbb9a8ff;
+    --pale-dogwood: #d4c0b3ff;
+    --pale-dogwood-2: #dcc7beff;
 }
+
+
 

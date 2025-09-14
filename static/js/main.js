@@ -1,21 +1,45 @@
 
-import { form } from "/ui/main.js"
+import { init } from "/static/js/init_generator.js"
 
-document.body.addEventListener("page-ready", e => {
+import { toggle_input, dynamic_input, input } from "/static/js/input_control.js"
+
+import { form_change } from "/static/js/form_change.js"
+
+
+
+
+
+document.addEventListener("page-ready", e => {
 
     const user_form = document.querySelector(".user-form")
-
-    const css_code = document.querySelector(".css-code > prev")
-
+    
+    const css_code = document.querySelector(".css-code > pre")
+    
     const preview = document.querySelector(".preview")
 
-    import(e.detail.data.config).then(mod => {
 
-        user_form.innerHTML = form(mod.form_data)
 
-        css_code.innerHTML = mod.css(null)
+    init(e.detail.data.config, user_form, css_code, preview)
 
-        preview.innerHTML = mod.template(mod.css(null))
+    
+    
+    document.querySelectorAll(".toggle-input").forEach(item => {
+
+        toggle_input(item)
+    })
+
+    document.querySelectorAll(".dynamic-input").forEach(item => {
+
+        dynamic_input(item)
+    })
+
+    document.querySelectorAll(".input").forEach(item => {
+
+        input(item)
+    })
+
+    document.addEventListener("form-change", ()=>{
+
 
     })
 

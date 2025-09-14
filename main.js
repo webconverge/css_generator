@@ -1,9 +1,7 @@
 
 import { page } from "/ui/main.js"
 
-
 let current_path = "/"
-
 
 function render(path){
 
@@ -11,15 +9,19 @@ function render(path){
 
     fetch("/css_properties.json").then(res => res.json()).then(properties => {
 
-        if(root_path == "root"){
+        if(root_path == "home"){
+
+            document.title = "Home"
 
             document.body.innerHTML = page.home(properties)
         }
         else{
 
+            document.title = properties.find(property => property.path == path).name
+
             document.body.innerHTML = page.editor(properties, properties.find(property => property.path == path).name)
 
-            document.body.dispatchEvent(new CustomEvent("page-ready"), {
+            document.body.dispatchEvent(new CustomEvent("page-ready", {
                 
                 detail:{
 
@@ -27,13 +29,14 @@ function render(path){
                 },
 
                 bubbles:true
-            })
+            }))
         }
     })
 }
 
-
 history.replaceState({path:current_path}, "", current_path)
+
+render(current_path)
 
 document.body.addEventListener("click", e => {
 
@@ -54,7 +57,6 @@ document.body.addEventListener("click", e => {
     }
 
 })
-
 
 window.addEventListener("popstate", e => {
 
