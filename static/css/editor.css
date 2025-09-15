@@ -12,7 +12,7 @@
     grid-column:2/3;
     grid-row:1/-1;
     display:grid;
-    grid-template-columns:minmax(20px, auto) minmax(400px, 800px) minmax(20px, auto);
+    grid-template-columns:minmax(20px, auto) minmax(360px, 800px) minmax(20px, auto);
     grid-template-rows:70px 50px auto 50px;
 }
 
