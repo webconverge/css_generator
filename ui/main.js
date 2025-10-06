@@ -1,7 +1,7 @@
 
-import * as page from "/ui/page.js"
+import * as page from "./page.js"
 
-import { form } from "/ui/form.js" 
+import { form } from "./form.js" 
 
 
 export { page, form }

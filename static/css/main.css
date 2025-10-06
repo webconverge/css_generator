@@ -1,9 +1,9 @@
 
 
 
-@import url("/static/css/home.css");
+@import url("./home.css");
 
-@import url("/static/css/editor.css");
+@import url("./editor.css");
 
 :root{
     --black-olive: #1f271bff;

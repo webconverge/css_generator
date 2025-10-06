@@ -1,8 +1,8 @@
 
 
-import * as control from "/static/js/page_control.js"
+import * as control from "./page_control.js"
 
-import { form_change } from "/static/js/form_change.js"
+import { form_change } from "./form_change.js"
 
 
 document.addEventListener("page-ready", e => {
