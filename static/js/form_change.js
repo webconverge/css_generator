@@ -3,6 +3,8 @@
 
 function form_change(data){
 
+    const prefix = "/css_generator"
+
     const form = document.querySelector("form")
 
     const preview = document.querySelector(".preview div")
@@ -13,7 +15,7 @@ function form_change(data){
 
         const form_data = new FormData(form)
 
-        import(data.config).then(mod => {
+        import(prefix+data.config).then(mod => {
 
             css_code.innerHTML = mod.css(form_data)
 
