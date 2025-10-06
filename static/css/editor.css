@@ -291,7 +291,7 @@ body[medium]{
         grid-column:1/-1;
     }
 
-    .header{
+    .editor .header{
 
         button{
             display:initial;

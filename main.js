@@ -5,11 +5,13 @@ import { form } from "./ui/main.js"
 
 let current_path = "/"
 
+const prefix = "/css_generator"
+
 function render(path){
 
     const root_path = path.split("/")[1] || "home"
 
-    fetch("./css_properties.json").then(res => res.json()).then(properties => {
+    fetch(prefix+"/css_properties.json").then(res => res.json()).then(properties => {
 
         if(root_path == "home"){
 
@@ -42,7 +44,7 @@ function render(path){
     })
 }
 
-history.replaceState({path:current_path}, "", current_path)
+history.replaceState({path:prefix+current_path}, "", prefix+current_path)
 
 render(current_path)
 
@@ -56,7 +58,7 @@ document.body.addEventListener("click", e => {
 
             current_path = e.target.pathname
 
-            history.pushState({path:current_path}, "", current_path)
+            history.pushState({path:prefix+current_path}, "", prefix+current_path)
 
             render(e.target.pathname)
 
@@ -68,7 +70,15 @@ document.body.addEventListener("click", e => {
 
 window.addEventListener("popstate", e => {
 
-    current_path = e.state.path
+    if(!prefix){
+
+        current_path = e.state.path
+    }
+    else{
+
+        current_path = e.state.path.split(prefix)[1]
+    }
+
 
     render(current_path)
 })
