@@ -9,7 +9,7 @@ function render(path){
 
     const root_path = path.split("/")[1] || "home"
 
-    fetch("/css_properties.json").then(res => res.json()).then(properties => {
+    fetch("./css_properties.json").then(res => res.json()).then(properties => {
 
         if(root_path == "home"){
 
