@@ -1,7 +1,7 @@
 
-import { page } from "/ui/main.js"
+import { page } from "ui/main.js"
 
-import { form } from "/ui/main.js"
+import { form } from "ui/main.js"
 
 let current_path = "/"
 
