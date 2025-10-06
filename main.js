@@ -23,7 +23,7 @@ function render(path){
 
             const data = properties.find(property => property.path == path)
 
-            import(data.config).then(mod => {
+            import(prefix+data.config).then(mod => {
 
                 document.title = data.name
 
