@@ -134,7 +134,7 @@
         border-radius:5px;
     }
 
-    div{
+    > div{
         flex-grow:1;
         background-color:white;
     }

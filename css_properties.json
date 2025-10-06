@@ -8,9 +8,9 @@
     },
 
     {
-        "name":"Flex Box",
-        "path":"/editor/flex-box",
-        "config":"/css_properties/flex_box.js"
+        "name":"Color",
+        "path":"/editor/color",
+        "config":"/css_properties/color.js"
     },
      
     {
@@ -20,10 +20,43 @@
     },
    
     {
-        "name":"Background",
-        "path":"/editor/background",
-        "config":"/css_properties/background.js"
+        "name":"Background Color",
+        "path":"/editor/background-color",
+        "config":"/css_properties/background_color.js"
+    },
+
+    {
+        "name":"Font Weight",
+        "path":"/editor/font-weight",
+        "config":"/css_properties/font_weight.js"
+    },
+
+    {
+        "name":"Text Align",
+        "path":"/editor/text-align",
+        "config":"/css_properties/text_align.js"
+    },
+
+    {
+        "name":"Font Size",
+        "path":"/editor/font-size",
+        "config":"/css_properties/font_size.js"
+    },
+
+    {
+        "name":"Padding",
+        "path":"/editor/padding",
+        "config":"/css_properties/padding.js"
+    },
+
+    
+    {
+        "name":"Margin",
+        "path":"/editor/margin",
+        "config":"/css_properties/margin.js"
     }
+
+
 
 
 ]
